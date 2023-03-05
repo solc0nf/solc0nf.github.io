@@ -1,18 +1,19 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Solc0nf Knowledge base</title>
+    <title>solc0nf Knowledge base</title>
     <link>https://solc0nf.github.io/index.html</link>
-    <description>Recent content on Solc0nf Knowledge base</description>
+    <description>Recent content on solc0nf Knowledge base</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Wed, 25 Jan 2023 11:00:44 +0400</lastBuildDate><atom:link href="https://solc0nf.github.io/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>Basics</title>
-      <link>https://solc0nf.github.io/basics/index.html</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://solc0nf.github.io/basics/index.html</guid>
-      <description>Everything boils down to basics. Unless you have your basics right, you won&amp;rsquo;t get far.</description>
+      <title>Exploit Articles</title>
+      <link>https://solc0nf.github.io/exploit-articles/index.html</link>
+      <pubDate>Sat, 04 Mar 2023 17:23:17 +0400</pubDate>
+      <guid>https://solc0nf.github.io/exploit-articles/index.html</guid>
+      <description>Articles about common exploits will be posted under this section.
+Information contained in these articles have been sourced from various sites during the course of my studies. I have tried to construct the articles in such a way that it would be easy for beginners in &amp;gt;the field (Infosec, or Information Security) to understand. The material provided here is intended &amp;gt;solely for educational purposes only. I intend no copyright infringement of any kind.</description>
     </item>
   </channel>
 </rss>
