@@ -1,15 +1,23 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://solc0nf.github.io/tags/dirtycow/index.html</loc>
-    <lastmod>2023-03-06T08:19:38+04:00</lastmod>
+    <loc>https://solc0nf.github.io/tags/exploit/index.html</loc>
+    <lastmod>2023-03-07T19:31:16+04:00</lastmod>
   </url>
   <url>
-    <loc>https://solc0nf.github.io/tags/exploit/index.html</loc>
-    <lastmod>2023-03-06T08:19:38+04:00</lastmod>
+    <loc>https://solc0nf.github.io/tags/linux/index.html</loc>
+    <lastmod>2023-03-07T19:31:16+04:00</lastmod>
+  </url>
+  <url>
+    <loc>https://solc0nf.github.io/tags/samba/index.html</loc>
+    <lastmod>2023-03-07T19:31:16+04:00</lastmod>
   </url>
   <url>
     <loc>https://solc0nf.github.io/tags/index.html</loc>
+    <lastmod>2023-03-07T19:31:16+04:00</lastmod>
+  </url>
+  <url>
+    <loc>https://solc0nf.github.io/tags/dirtycow/index.html</loc>
     <lastmod>2023-03-06T08:19:38+04:00</lastmod>
   </url>
   <url>

