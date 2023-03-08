@@ -6,13 +6,13 @@
     <description>Recent content on solc0nf</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 07 Mar 2023 19:31:16 +0400</lastBuildDate><atom:link href="https://solc0nf.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 08 Mar 2023 07:17:41 +0400</lastBuildDate><atom:link href="https://solc0nf.github.io/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Exploit Articles</title>
       <link>https://solc0nf.github.io/exploit-articles/index.html</link>
-      <pubDate>Tue, 07 Mar 2023 19:31:16 +0400</pubDate>
+      <pubDate>Wed, 08 Mar 2023 07:17:41 +0400</pubDate>
       <guid>https://solc0nf.github.io/exploit-articles/index.html</guid>
-      <description>Articles about common exploits will be posted under this section.
+      <description>Articles about common exploits affecting Windows and Linux system.
 Information contained in these articles have been sourced from various sites during the course of my studies. I have tried to construct the articles in such a way that it would be easy for beginners in the field (Infosec, or Information Security) to understand. The material provided here is intended solely for educational purposes only. I intend no copyright infringement of any kind.</description>
     </item>
   </channel>
