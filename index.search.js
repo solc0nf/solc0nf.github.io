@@ -182,7 +182,7 @@ var relearn_search_index = [
       "samba",
       "linux"
     ],
-    "title": "Samba Trans2open Exploit",
+    "title": "Samba Trans2Open Exploit",
     "uri": "/exploit-articles/samba-trans2open-exploit/index.html"
   },
   {
