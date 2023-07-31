@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Encrypt and Share Files With Gpg on solc0nf</title>
+    <link>https://solc0nf.github.io/linux-howto/encrypt-and-share-files-with-gpg/index.html</link>
+    <description>Recent content in Encrypt and Share Files With Gpg on solc0nf</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 30 Jul 2023 20:17:39 +0400</lastBuildDate><atom:link href="https://solc0nf.github.io/linux-howto/encrypt-and-share-files-with-gpg/index.xml" rel="self" type="application/rss+xml" />
+  </channel>
+</rss>

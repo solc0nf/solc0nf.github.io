@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="height=device-height, width=device-width, initial-scale=1.0, minimum-scale=1.0">
+    <meta name="generator" content="Hugo 0.108.0">
+    <meta name="generator" content="Relearn 5.9.4+tip">
+    <meta name="robots" content="noindex, nofollow, noarchive, noimageindex">
+    <meta name="description" content="Exploit writeups, info sec articles..">
+    <meta name="author" content="solc0nf">
+    <title>Encrypt and Share Files With Gpg :: solc0nf</title>
+    <!-- https://github.com/filamentgroup/loadCSS/blob/master/README.md#how-to-use -->
+    <link href="/css/fontawesome-all.min.css?1690802202" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/fontawesome-all.min.css?1690802202" rel="stylesheet"></noscript>
+    <link href="/css/featherlight.min.css?1690802202" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/featherlight.min.css?1690802202" rel="stylesheet"></noscript>
+    <link href="/css/auto-complete.css?1690802202" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/auto-complete.css?1690802202" rel="stylesheet"></noscript>
+    <link href="/css/perfect-scrollbar.min.css?1690802202" rel="stylesheet">
+    <link href="/css/nucleus.css?1690802202" rel="stylesheet">
+    <link href="/css/fonts.css?1690802202" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/fonts.css?1690802202" rel="stylesheet"></noscript>
+    <link href="/css/theme.css?1690802202" rel="stylesheet">
+    <link href="/css/theme-relearn-dark.css?1690802202" rel="stylesheet" id="variant-style">
+    <link href="/css/ie.css?1690802202" rel="stylesheet">
+    <link href="/css/variant.css?1690802202" rel="stylesheet">
+    <link href="/css/print.css?1690802202" rel="stylesheet" media="print">
+    <script src="/js/url.js?1690802202"></script>
+    <script src="/js/variant.js?1690802202"></script>
+    <script>
+      // hack to let hugo tell us how to get to the root when using relativeURLs, it needs to be called *url= for it to do its magic:
+      // https://github.com/gohugoio/hugo/blob/145b3fcce35fbac25c7033c91c1b7ae6d1179da8/transform/urlreplacers/absurlreplacer.go#L72
+      window.index_js_url="/index.search.js";
+      var root_url="/";
+      var baseUri=root_url.replace(/\/$/, '');
+      // translations
+      window.T_Copy_to_clipboard = 'Copy to clipboard';
+      window.T_Copied_to_clipboard = 'Copied to clipboard!';
+      window.T_Copy_link_to_clipboard = 'Copy link to clipboard';
+      window.T_Link_copied_to_clipboard = 'Copied link to clipboard!';
+      window.T_No_results_found = 'No results found for \u0022{0}\u0022';
+      window.T_N_results_found = '{1} results found for \u0022{0}\u0022';
+      // some further base stuff
+      var baseUriFull='https:\/\/solc0nf.github.io/';
+      window.variants && variants.init( [ 'relearn-dark' ] );
+    </script>
+    <script src="/js/jquery.min.js?1690802202" defer></script>
+  </head>
+  <body class="mobile-support html disableInlineCopyToClipboard" data-url="/linux-howto/encrypt-and-share-files-with-gpg/index.html">
+    <div id="body" class="default-animation">
+      <div id="sidebar-overlay"></div>
+      <div id="toc-overlay"></div>
+      <nav id="topbar" class="highlightable" dir="ltr">
+        <div>
+          <div class="navigation">
+            <a class="nav nav-next" href="/linux-howto/secure-passwords-in-linux/index.html" title="Secure Passwords in Linux (&#129106;)"><i class="fas fa-chevron-right fa-fw"></i></a>
+          </div>
+          <div class="navigation">
+            <a class="nav nav-prev" href="/linux-howto/apache2-custom-site-with-self-signed-certificate/index.html" title="Apache2 Custom Site With Self Signed Certificate (&#129104;)"><i class="fas fa-chevron-left fa-fw"></i></a>
+          </div>
+          <div id="top-print-link">
+            <a class="print-link" title='Print whole chapter (CTRL+ALT+p)' href="/linux-howto/encrypt-and-share-files-with-gpg/index.print.html">
+              <i class="fas fa-print fa-fw"></i>
+            </a>
+          </div>
+          <div id="breadcrumbs">
+            <span id="sidebar-toggle-span">
+              <a href="#" id="sidebar-toggle" title='Menu (CTRL+ALT+n)'><i class="fas fa-bars fa-fw"></i></a>
+            </span>
+            <ol class="links" itemscope itemtype="http://schema.org/BreadcrumbList">
+              <li itemscope itemtype="https://schema.org/ListItem" itemprop="itemListElement"><a itemprop="item" href="/index.html"><span itemprop="name">solc0nf</span></a><meta itemprop="position" content="1"> > </li>
+              <li itemscope itemtype="https://schema.org/ListItem" itemprop="itemListElement"><a itemprop="item" href="/linux-howto/index.html"><span itemprop="name">Linux How To</span></a><meta itemprop="position" content="2"> > </li>
+              <li itemscope itemtype="https://schema.org/ListItem" itemprop="itemListElement"><span itemprop="name">Encrypt and Share Files With Gpg</span><meta itemprop="position" content="3"></li>
+            </ol>
+          </div>
+        </div>
+      </nav>
+      <main id="body-inner" class="highlightable default" tabindex="-1">
+        <div class="flex-block-wrapper">
+          <div id="head-tags">
+<div class="tags">
+  <a class="tag-link" href="/tags/decrypt/index.html">decrypt</a>
+  <a class="tag-link" href="/tags/encrypt/index.html">encrypt</a>
+  <a class="tag-link" href="/tags/gnupg/index.html">gnupg</a>
+  <a class="tag-link" href="/tags/gpg/index.html">gpg</a>
+</div>
+          </div>
+          <article class="default">
+<h1 id="encrypt-and-share-files-with-gpg">Encrypt and Share Files With Gpg</h1>
+
+<p>
+<a href="/images/public_key_encryption2023-07-31_13-07.png" data-featherlight="image">
+<img src="/images/public_key_encryption2023-07-31_13-07.png" alt="PKE" style="height: auto; width: auto;" loading="lazy">
+</a></p>
+<p>Today, we will look at encrypting and sharing files securely using <strong>gpg</strong>. GnuPG (GPG) is a tool used to encrypt data and create digital signatures.</p>
+<p>For our exercise, we will consider two users on two different linux systems. They are running a mustard smuggling operations out of an undisclosed location and need to share information securely, to avoid any interception by Mustardpol. 😉</p>
+<p>User1 : sierra1 with email <a href="mailto:sierra1@mustardops.org">sierra1@mustardops.org</a>
+User2 : november2 with email <a href="mailto:november2@mustardops.org">november2@mustardops.org</a></p>
+<p>The workflow goes as follows:</p>
+<p>sierra1 wants to send details of the next shipment of mustard to november2. Both these guys needs to create their own key pairs (public and private) on their respecive systems. Once the key pairs have been generated, they will share their repective public keys with each other. (<em>We will assume that they can do so by using rsync</em>). Sharing public keys can be done via open communication channels like email, but there should be a mechanism by which you have the <strong>assurance</strong> that the public key does belong to the person with whom you wish to share information with.</p>
+<p>The private keys, however should never be shared and should be stored securely.</p>
+<p>User1 and User2 generates their own key pairs with the following command:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>gpg --full-generate-key
+</span></span></code></pre></div><p>They answer the prompts generated by gpg and end up with their key pair. We can list our key pairs with:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>gpg --list-public-keys
+</span></span><span style="display:flex;"><span>gpg --list-secret-keys <span style="color:#75715e"># displays the private keys</span>
+</span></span></code></pre></div><p>Public Key Listing (User1)
+
+<a href="/images/sierra1_gpg_key_listing_2023-07-26_12-54.png" data-featherlight="image">
+<img src="/images/sierra1_gpg_key_listing_2023-07-26_12-54.png" alt="Sierra1 GPG Key Listing" style="height: auto; width: auto;" loading="lazy">
+</a></p>
+<p>Private Key Listing (User1)</p>
+<p>
+<a href="/images/sierra1_gpg_rpivate_key_listing_2023-07-26_12-54.png" data-featherlight="image">
+<img src="/images/sierra1_gpg_rpivate_key_listing_2023-07-26_12-54.png" alt="Sierra1 Private Key Listing" style="height: auto; width: auto;" loading="lazy">
+</a></p>
+<p>The same comands as above will be executed by User2, substituting the name and email address parameters.</p>
+<p>Public Ket Listing (User2)</p>
+<p>
+<a href="/images/november2_gpg_public_key_2023-07-26_17-19.png" data-featherlight="image">
+<img src="/images/november2_gpg_public_key_2023-07-26_17-19.png" alt="Public Key User2" style="height: auto; width: auto;" loading="lazy">
+</a></p>
+<p>Private Key Listing (User2)</p>
+<p>
+<a href="/images/user2_private_key_listing_2023-07-26_17-21.png" data-featherlight="image">
+<img src="/images/user2_private_key_listing_2023-07-26_17-21.png" alt="User2 Private Key Listing" style="height: auto; width: auto;" loading="lazy">
+</a></p>
+<p>They will now need to export their public keys into a file and share those with each other. This is done with the fillowing command:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>gpg --export -o sierra1.key 68A14F32098A4698C1DF53C631E2FFFE296EA030
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># the last paramater is the key ID which is displayed when we list the kseys with the -list-keys option above</span>
+</span></span></code></pre></div><p>Now that they have shared their public keys with each other, they need to import the public keys into their respective system&rsquo;s public keyring with the following command.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>gpg --import sierra1.key <span style="color:#75715e"># User2 will execute this command on his system</span>
+</span></span><span style="display:flex;"><span>gpg --import november2.key <span style="color:#75715e">## User1 will execute this command on his system</span>
+</span></span></code></pre></div><p>The next step will be encrypting files and sending them to the recipeint. Lets say that User1 want to send a text file <code>mustard_shipments.txt</code> to User2. He will do so with the follwing command:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>gpg -e -r november2@mustardops.org mustard_shipments.txt
+</span></span></code></pre></div><p>This command will create a file named <code>mustard_shipments.txt.gpg</code>, which can be send to the recipient. The recipient can now decrypt the file with the following command:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>gpg -d mustard_shipments.txt.gpg
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## store the decrypted data in shipment.txt</span>
+</span></span><span style="display:flex;"><span>gpg -d -o shipment.txt  mustard_shipments.txt.gpg
+</span></span></code></pre></div><p>We can use <strong>gpg</strong> to encrypt a file with <code>gpg -c file_to_be_encrypted.txt</code>. You will be prompted for a password during the encryption process. This command will create an encrypted file named <code>file_to_be_encrypted.txt.gpg</code>.</p>
+<p>⚠️ <em>If the file you are encrypting contains really sensitive data, you should erase the original file securely once it hs been encrypted</em>.</p>
+<p>To decrypt the file use <code>gpg -d file_to_be_encrypted.txt.gpg</code></p>
+<p>You can delete a user&rsquo;s GPG Keys from your system with the following command(s):</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>gpg --delete-secret-key november2@mustardops.org
+</span></span><span style="display:flex;"><span>pg --delete-key november2@mustardops.org
+</span></span></code></pre></div><hr>
+
+            <footer class="footline">
+            </footer>
+          </article>
+        </div>
+      </main>
+    </div>
+    <aside id="sidebar" class="default-animation showVisitedLinks" dir="ltr">
+      <div id="header-wrapper" class="default-animation">
+        <div id="header" class="default-animation">
+<img src="/solconf.png"></img>
+<h6>Solc0nf Systems</h6>
+        </div>
+        <form action="/search.html" method="get"><div class="searchbox default-animation">
+          <button type="submit" title="Search (CTRL+ALT+f)"><i class="fas fa-search"></i></button>
+          <label class="a11y-only" for="search-by">Search</label>
+          <input data-search-input id="search-by" name="search-by" class="search-by" type="search" placeholder="Search...">
+          <span data-search-clear=""><i class="fas fa-times"></i></span>
+        </div></form>
+        <script>
+          var contentLangs=['en'];
+        </script>
+        <script src="/js/auto-complete.js?1690802202" defer></script>
+        <script src="/js/lunr/lunr.min.js?1690802202" defer></script>
+        <script src="/js/lunr/lunr.stemmer.support.min.js?1690802202" defer></script>
+        <script src="/js/lunr/lunr.multi.min.js?1690802202" defer></script>
+        <script src="/js/lunr/lunr.en.min.js?1690802202" defer></script>
+        <script src="/js/search.js?1690802202" defer></script>
+      </div>
+      <div id="homelinks" class="default-animation">
+        <ul>
+          <li><a class="padding" href="/index.html"><i class="fas fa-home"></i> Home</a></li>
+        </ul>
+      </div>
+      <div id="content-wrapper" class="highlightable">
+        <ul class="topics collapsible-menu">
+          <li data-nav-id="/exploit-articles/index.html" class="dd-item"><input type="checkbox" id="section-3b4d423a3ed6a06d19aa7b4fd218b430" aria-controls="subsections-3b4d423a3ed6a06d19aa7b4fd218b430" class="toggle"><label class="a11y-only toggle" for="section-3b4d423a3ed6a06d19aa7b4fd218b430" >Submenu Exploit Articles</label><a href="/exploit-articles/index.html">Exploit Articles<i class="fas fa-check read-icon"></i></a><ul id="subsections-3b4d423a3ed6a06d19aa7b4fd218b430">
+          <li data-nav-id="/exploit-articles/dirty-pipe/index.html" class="dd-item"><a href="/exploit-articles/dirty-pipe/index.html">Dirty Pipe<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/exploit-articles/shellshock/index.html" class="dd-item"><a href="/exploit-articles/shellshock/index.html">ShellShock<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/exploit-articles/samba-trans2open-exploit/index.html" class="dd-item"><a href="/exploit-articles/samba-trans2open-exploit/index.html">Samba Trans2open Exploit<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/exploit-articles/the-dirtycow-exploit/index.html" class="dd-item"><a href="/exploit-articles/the-dirtycow-exploit/index.html">The Dirtycow Exploit<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/exploit-articles/eternal-blue/index.html" class="dd-item"><a href="/exploit-articles/eternal-blue/index.html">Eternal Blue<i class="fas fa-check read-icon"></i></a></li></ul></li>
+          <li data-nav-id="/linux-howto/index.html" class="dd-item parent"><input type="checkbox" id="section-2d4257959db23532f0d2a8f029bc3b96" aria-controls="subsections-2d4257959db23532f0d2a8f029bc3b96" class="toggle" checked><label class="a11y-only toggle" for="section-2d4257959db23532f0d2a8f029bc3b96" >Submenu Linux How To</label><a href="/linux-howto/index.html">Linux How To<i class="fas fa-check read-icon"></i></a><ul id="subsections-2d4257959db23532f0d2a8f029bc3b96">
+          <li data-nav-id="/linux-howto/apache2-custom-site-with-self-signed-certificate/index.html" class="dd-item"><a href="/linux-howto/apache2-custom-site-with-self-signed-certificate/index.html">Apache2 Custom Site With Self Signed Certificate<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux-howto/encrypt-and-share-files-with-gpg/index.html" class="dd-item active"><a href="/linux-howto/encrypt-and-share-files-with-gpg/index.html">Encrypt and Share Files With Gpg<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux-howto/secure-passwords-in-linux/index.html" class="dd-item"><a href="/linux-howto/secure-passwords-in-linux/index.html">Secure Passwords in Linux<i class="fas fa-check read-icon"></i></a></li></ul></li>
+        </ul>
+        <div id="shortcuts">
+          <div class="nav-title">More</div>
+          <ul>
+            <li><a class="padding" href="/tags/index.html"><i class='fas fa-tags'></i> Tags</a></li>
+          </ul>
+        </div>
+        <div class="footermargin footerLangSwitch footerVariantSwitch footerVisitedLinks footerFooter showVisitedLinks showFooter"></div>
+        <hr class="default-animation footerLangSwitch footerVariantSwitch footerVisitedLinks footerFooter showVisitedLinks showFooter">
+        <div id="prefooter" class="footerLangSwitch footerVariantSwitch footerVisitedLinks showVisitedLinks">
+          <ul>
+            <li id="select-language-container" class="footerLangSwitch">
+              <div class="padding select-container">
+                <i class="fas fa-language fa-fw"></i>
+                <span>&nbsp;</span>
+                <div class="select-style">
+                  <label class="a11y-only" for="select-language">Language</label>
+                  <select id="select-language" onchange="location = baseUri + this.value;">
+                  </select>
+                </div>
+                <div class="select-clear"></div>
+              </div>
+            </li>
+            <li id="select-variant-container" class="footerVariantSwitch">
+              <div class="padding select-container">
+                <i class="fas fa-paint-brush fa-fw"></i>
+                <span>&nbsp;</span>
+                <div class="select-style">
+                  <label class="a11y-only" for="select-variant">Theme</label>
+                  <select id="select-variant" onchange="window.variants && variants.changeVariant( this.value );">
+                    <option id="relearn-dark" value="relearn-dark" selected>Relearn Dark</option>
+                  </select>
+                </div>
+                <div class="select-clear"></div>
+              </div>
+              <script>window.variants && variants.markSelectedVariant();</script>
+            </li>
+            <li class="footerVisitedLinks showVisitedLinks"><button class="padding" onclick="clearHistory();"><i class="fas fa-history fa-fw"></i> Clear History</button></li>
+          </ul>
+        </div>
+        <div id="footer" class="footerFooter showFooter">
+	    <p>Built with <a href="https://github.com/McShelby/hugo-theme-relearn" title="love"><i class="fas fa-heart"></i></a> by <a href="https://gohugo.io/">Hugo</a></p>
+        </div>
+      </div>
+    </aside>
+    <script src="/js/clipboard.min.js?1690802202" defer></script>
+    <script src="/js/perfect-scrollbar.min.js?1690802202" defer></script>
+    <script src="/js/featherlight.min.js?1690802202" defer></script>
+    <script src="/js/theme.js?1690802202" defer></script>
+  </body>
+</html>

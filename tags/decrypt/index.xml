@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>decrypt on solc0nf</title>
+    <link>https://solc0nf.github.io/tags/decrypt/index.html</link>
+    <description>Recent content in decrypt on solc0nf</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 30 Jul 2023 20:17:39 +0400</lastBuildDate><atom:link href="https://solc0nf.github.io/tags/decrypt/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Encrypt and Share Files With Gpg</title>
+      <link>https://solc0nf.github.io/linux-howto/encrypt-and-share-files-with-gpg/index.html</link>
+      <pubDate>Sun, 30 Jul 2023 20:17:39 +0400</pubDate>
+      <guid>https://solc0nf.github.io/linux-howto/encrypt-and-share-files-with-gpg/index.html</guid>
+      <description>Today, we will look at encrypting and sharing files securely using gpg. GnuPG (GPG) is a tool used to encrypt data and create digital signatures.
+For our exercise, we will consider two users on two different linux systems. They are running a mustard smuggling operations out of an undisclosed location and need to share information securely, to avoid any interception by Mustardpol. 😉
+User1 : sierra1 with email sierra1@mustardops.org User2 : november2 with email november2@mustardops.</description>
+    </item>
+  </channel>
+</rss>

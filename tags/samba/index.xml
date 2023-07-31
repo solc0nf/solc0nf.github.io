@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>samba on solc0nf</title>
+    <link>https://solc0nf.github.io/tags/samba/index.html</link>
+    <description>Recent content in samba on solc0nf</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 07 Mar 2023 19:31:16 +0400</lastBuildDate><atom:link href="https://solc0nf.github.io/tags/samba/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Samba Trans2open Exploit</title>
+      <link>https://solc0nf.github.io/exploit-articles/samba-trans2open-exploit/index.html</link>
+      <pubDate>Tue, 07 Mar 2023 19:31:16 +0400</pubDate>
+      <guid>https://solc0nf.github.io/exploit-articles/samba-trans2open-exploit/index.html</guid>
+      <description>A little about Samba.
+Samba is the standard Windows interoperabiity suite of programs for Linux and Unix. The Samba package provides secure, stable and fast file and print services for all clients such as OS/2, Linux, FreeBSD, using the SMB/CIFS protocol.
+Samba is an important component to seamlessly integrate Linux servers and desktops into a Windows Active Directory environment. It can function both as a domain controller or as a regular domain member.</description>
+    </item>
+  </channel>
+</rss>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>bash on solc0nf</title>
+    <link>https://solc0nf.github.io/tags/bash/index.html</link>
+    <description>Recent content in bash on solc0nf</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 08 Mar 2023 07:17:41 +0400</lastBuildDate><atom:link href="https://solc0nf.github.io/tags/bash/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>ShellShock</title>
+      <link>https://solc0nf.github.io/exploit-articles/shellshock/index.html</link>
+      <pubDate>Wed, 08 Mar 2023 07:17:41 +0400</pubDate>
+      <guid>https://solc0nf.github.io/exploit-articles/shellshock/index.html</guid>
+      <description>ShellShock is a vulnerability in the Bash shell (GNU Bash upto version 4.3) that allows Bash to execute unintentional commands from environment variables. Attackers can issue commands remotely on the target host with elevated privileges, resulting in complete takeover of the system.
+Let us have a look at what environment variables are.
+Environment variables are the variables specific to a certain environment, like a root user would have different environment variables than a normal user in a Linux system.</description>
+    </item>
+  </channel>
+</rss>

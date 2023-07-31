@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>linux on solc0nf</title>
+    <link>https://solc0nf.github.io/tags/linux/index.html</link>
+    <description>Recent content in linux on solc0nf</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 30 Jul 2023 20:15:17 +0400</lastBuildDate><atom:link href="https://solc0nf.github.io/tags/linux/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Secure Passwords in Linux</title>
+      <link>https://solc0nf.github.io/linux-howto/secure-passwords-in-linux/index.html</link>
+      <pubDate>Sun, 30 Jul 2023 20:15:17 +0400</pubDate>
+      <guid>https://solc0nf.github.io/linux-howto/secure-passwords-in-linux/index.html</guid>
+      <description>There are many utilities in Linux that help us in generating random passwords. The neccessity of having a strong password is well known. The problem with random passwords is that it is nearly impossible for us remember them. Using a password manager like KeePassX or KeePass2. That way, you only have to remember one password, the master pasword to unlock your password vault. This leads to another monkey&amp;rsquo;s tail scenario. If we loose/forget the master password, we you&amp;rsquo;re doomed.</description>
+    </item>
+    <item>
+      <title>Dirty Pipe</title>
+      <link>https://solc0nf.github.io/exploit-articles/dirty-pipe/index.html</link>
+      <pubDate>Thu, 09 Mar 2023 15:38:15 +0400</pubDate>
+      <guid>https://solc0nf.github.io/exploit-articles/dirty-pipe/index.html</guid>
+      <description>Vulnerability Affected OS CVE CVSS Score Disclosure Date Dirty Pipe Linux (kernel versions 5.8 and newer) CVE-2022-0847 7.8 (high) March 7 2022 This exploit was disclosed by Max Kellermann.
+DirtyPipe is a local privilege escalation vulnerability, which allows a user to bypass file permission restrictions and write arbitrary data to any file, provided certain conditions are met, the primary one being that the user has to have read permissions to the file.</description>
+    </item>
+    <item>
+      <title>ShellShock</title>
+      <link>https://solc0nf.github.io/exploit-articles/shellshock/index.html</link>
+      <pubDate>Wed, 08 Mar 2023 07:17:41 +0400</pubDate>
+      <guid>https://solc0nf.github.io/exploit-articles/shellshock/index.html</guid>
+      <description>ShellShock is a vulnerability in the Bash shell (GNU Bash upto version 4.3) that allows Bash to execute unintentional commands from environment variables. Attackers can issue commands remotely on the target host with elevated privileges, resulting in complete takeover of the system.
+Let us have a look at what environment variables are.
+Environment variables are the variables specific to a certain environment, like a root user would have different environment variables than a normal user in a Linux system.</description>
+    </item>
+    <item>
+      <title>Samba Trans2open Exploit</title>
+      <link>https://solc0nf.github.io/exploit-articles/samba-trans2open-exploit/index.html</link>
+      <pubDate>Tue, 07 Mar 2023 19:31:16 +0400</pubDate>
+      <guid>https://solc0nf.github.io/exploit-articles/samba-trans2open-exploit/index.html</guid>
+      <description>A little about Samba.
+Samba is the standard Windows interoperabiity suite of programs for Linux and Unix. The Samba package provides secure, stable and fast file and print services for all clients such as OS/2, Linux, FreeBSD, using the SMB/CIFS protocol.
+Samba is an important component to seamlessly integrate Linux servers and desktops into a Windows Active Directory environment. It can function both as a domain controller or as a regular domain member.</description>
+    </item>
+  </channel>
+</rss>

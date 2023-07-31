@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>apache on solc0nf</title>
+    <link>https://solc0nf.github.io/tags/apache/index.html</link>
+    <description>Recent content in apache on solc0nf</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 30 Jul 2023 20:20:28 +0400</lastBuildDate><atom:link href="https://solc0nf.github.io/tags/apache/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Apache2 Custom Site With Self Signed Certificate</title>
+      <link>https://solc0nf.github.io/linux-howto/apache2-custom-site-with-self-signed-certificate/index.html</link>
+      <pubDate>Sun, 30 Jul 2023 20:20:28 +0400</pubDate>
+      <guid>https://solc0nf.github.io/linux-howto/apache2-custom-site-with-self-signed-certificate/index.html</guid>
+      <description>For this activity, we will use a Debian 12 VM with apache installed. The debian installer gives us an option to install a web server (among other things) during the installation process. In case we need to install apache2 after the machine has booted up, it can be done with apt install apache2.
+Either way, once you have apache installed, we can go to http://your_server_ip and we&amp;rsquo;ll get the default apache landing page as show inthe screen grab below.</description>
+    </item>
+  </channel>
+</rss>

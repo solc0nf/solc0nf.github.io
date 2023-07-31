@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Linux How To on solc0nf</title>
+    <link>https://solc0nf.github.io/linux-howto/index.html</link>
+    <description>Recent content in Linux How To on solc0nf</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 30 Jul 2023 19:54:13 +0400</lastBuildDate><atom:link href="https://solc0nf.github.io/linux-howto/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Apache2 Custom Site With Self Signed Certificate</title>
+      <link>https://solc0nf.github.io/linux-howto/apache2-custom-site-with-self-signed-certificate/index.html</link>
+      <pubDate>Sun, 30 Jul 2023 20:20:28 +0400</pubDate>
+      <guid>https://solc0nf.github.io/linux-howto/apache2-custom-site-with-self-signed-certificate/index.html</guid>
+      <description>For this activity, we will use a Debian 12 VM with apache installed. The debian installer gives us an option to install a web server (among other things) during the installation process. In case we need to install apache2 after the machine has booted up, it can be done with apt install apache2.
+Either way, once you have apache installed, we can go to http://your_server_ip and we&amp;rsquo;ll get the default apache landing page as show inthe screen grab below.</description>
+    </item>
+    <item>
+      <title>Encrypt and Share Files With Gpg</title>
+      <link>https://solc0nf.github.io/linux-howto/encrypt-and-share-files-with-gpg/index.html</link>
+      <pubDate>Sun, 30 Jul 2023 20:17:39 +0400</pubDate>
+      <guid>https://solc0nf.github.io/linux-howto/encrypt-and-share-files-with-gpg/index.html</guid>
+      <description>Today, we will look at encrypting and sharing files securely using gpg. GnuPG (GPG) is a tool used to encrypt data and create digital signatures.
+For our exercise, we will consider two users on two different linux systems. They are running a mustard smuggling operations out of an undisclosed location and need to share information securely, to avoid any interception by Mustardpol. 😉
+User1 : sierra1 with email sierra1@mustardops.org User2 : november2 with email november2@mustardops.</description>
+    </item>
+    <item>
+      <title>Secure Passwords in Linux</title>
+      <link>https://solc0nf.github.io/linux-howto/secure-passwords-in-linux/index.html</link>
+      <pubDate>Sun, 30 Jul 2023 20:15:17 +0400</pubDate>
+      <guid>https://solc0nf.github.io/linux-howto/secure-passwords-in-linux/index.html</guid>
+      <description>There are many utilities in Linux that help us in generating random passwords. The neccessity of having a strong password is well known. The problem with random passwords is that it is nearly impossible for us remember them. Using a password manager like KeePassX or KeePass2. That way, you only have to remember one password, the master pasword to unlock your password vault. This leads to another monkey&amp;rsquo;s tail scenario. If we loose/forget the master password, we you&amp;rsquo;re doomed.</description>
+    </item>
+  </channel>
+</rss>

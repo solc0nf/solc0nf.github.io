@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="height=device-height, width=device-width, initial-scale=1.0, minimum-scale=1.0">
+    <meta name="generator" content="Hugo 0.108.0">
+    <meta name="generator" content="Relearn 5.9.4+tip">
+    <meta name="robots" content="noindex, nofollow, noarchive, noimageindex">
+    <meta name="description" content="Exploit writeups, info sec articles..">
+    <meta name="author" content="solc0nf">
+    <title>Secure Passwords in Linux :: solc0nf</title>
+    <!-- https://github.com/filamentgroup/loadCSS/blob/master/README.md#how-to-use -->
+    <link href="/css/fontawesome-all.min.css?1690802202" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/fontawesome-all.min.css?1690802202" rel="stylesheet"></noscript>
+    <link href="/css/featherlight.min.css?1690802202" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/featherlight.min.css?1690802202" rel="stylesheet"></noscript>
+    <link href="/css/auto-complete.css?1690802202" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/auto-complete.css?1690802202" rel="stylesheet"></noscript>
+    <link href="/css/perfect-scrollbar.min.css?1690802202" rel="stylesheet">
+    <link href="/css/nucleus.css?1690802202" rel="stylesheet">
+    <link href="/css/fonts.css?1690802202" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/fonts.css?1690802202" rel="stylesheet"></noscript>
+    <link href="/css/theme.css?1690802202" rel="stylesheet">
+    <link href="/css/theme-relearn-dark.css?1690802202" rel="stylesheet" id="variant-style">
+    <link href="/css/ie.css?1690802202" rel="stylesheet">
+    <link href="/css/variant.css?1690802202" rel="stylesheet">
+    <link href="/css/print.css?1690802202" rel="stylesheet" media="print">
+    <link href="/css/format-print.css?1690802202" rel="stylesheet">
+    <script src="/js/url.js?1690802202"></script>
+    <script src="/js/variant.js?1690802202"></script>
+    <script>
+      // hack to let hugo tell us how to get to the root when using relativeURLs, it needs to be called *url= for it to do its magic:
+      // https://github.com/gohugoio/hugo/blob/145b3fcce35fbac25c7033c91c1b7ae6d1179da8/transform/urlreplacers/absurlreplacer.go#L72
+      window.index_js_url="/index.search.js";
+      var root_url="/";
+      var baseUri=root_url.replace(/\/$/, '');
+      // translations
+      window.T_Copy_to_clipboard = 'Copy to clipboard';
+      window.T_Copied_to_clipboard = 'Copied to clipboard!';
+      window.T_Copy_link_to_clipboard = 'Copy link to clipboard';
+      window.T_Link_copied_to_clipboard = 'Copied link to clipboard!';
+      window.T_No_results_found = 'No results found for \u0022{0}\u0022';
+      window.T_N_results_found = '{1} results found for \u0022{0}\u0022';
+      // some further base stuff
+      var baseUriFull='https:\/\/solc0nf.github.io/';
+      window.variants && variants.init( [ 'relearn-dark' ] );
+    </script>
+    <script src="/js/jquery.min.js?1690802202" defer></script>
+  </head>
+  <body class="mobile-support print disableInlineCopyToClipboard" data-url="/linux-howto/secure-passwords-in-linux/index.html">
+    <div id="body" class="default-animation">
+      <div id="sidebar-overlay"></div>
+      <div id="toc-overlay"></div>
+      <nav id="topbar" class="highlightable" dir="ltr">
+        <div>
+          <div id="breadcrumbs">
+            <span id="sidebar-toggle-span">
+              <a href="#" id="sidebar-toggle" title='Menu (CTRL+ALT+n)'><i class="fas fa-bars fa-fw"></i></a>
+            </span>
+            <ol class="links" itemscope itemtype="http://schema.org/BreadcrumbList">
+              <li itemscope itemtype="https://schema.org/ListItem" itemprop="itemListElement"><a itemprop="item" href="/index.html"><span itemprop="name">solc0nf</span></a><meta itemprop="position" content="1"> > </li>
+              <li itemscope itemtype="https://schema.org/ListItem" itemprop="itemListElement"><a itemprop="item" href="/linux-howto/index.html"><span itemprop="name">Linux How To</span></a><meta itemprop="position" content="2"> > </li>
+              <li itemscope itemtype="https://schema.org/ListItem" itemprop="itemListElement"><span itemprop="name">Secure Passwords in Linux</span><meta itemprop="position" content="3"></li>
+            </ol>
+          </div>
+        </div>
+      </nav>
+      <main id="body-inner" class="highlightable default" tabindex="-1">
+        <div class="flex-block-wrapper">
+          <div id="head-tags">
+<div class="tags">
+  <a class="tag-link" href="/tags/generate/index.html">generate</a>
+  <a class="tag-link" href="/tags/linux/index.html">linux</a>
+  <a class="tag-link" href="/tags/secure/index.html">secure</a>
+</div>
+          </div>
+          <article class="default">
+<h1 id="secure-passwords-in-linux">Secure Passwords in Linux</h1>
+
+<p>There are many utilities in Linux that help us in generating random passwords. The neccessity of having a strong password is well known. The problem with random passwords is that it is nearly impossible for us remember them. Using a password manager like <strong>KeePassX</strong> or <strong>KeePass2</strong>. That way, you only have to remember one password, the <strong>master pasword</strong> to unlock your password vault. This leads to another monkey&rsquo;s tail scenario. If we loose/forget the master password, we you&rsquo;re doomed.</p>
+<p>
+		
+<a href="/images/forgot_password.avif?height=300px" data-featherlight="image">
+<img src="/images/forgot_password.avif?height=300px" alt="Forgot Password" style="height: 300px; width: auto;" loading="lazy">
+</a></p>
+<h4 id="utilities-you-can-use">Utilities you can use</h4>
+<h5 id="openssl">OpenSSL</h5>
+<p>You can use OpenSSL to generate a random password for you with the following command:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>    openssl rand -base64 <span style="color:#ae81ff">20</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># This command will generate a random 20 character long password as shown below.</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>XAOuOA3ZE+RnHxHqo8tAJgT0p8k=
+</span></span></code></pre></div><h5 id="urandom">Urandom</h5>
+<p>We can generate randomg passwords with <code>/dev/urandom</code> like so</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>sudo &lt; /dev/urandom tr -dc A-Za-z0-9 | head -c20; echo
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># here we are using the alphanumeric charset with a length of 20 chars</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>PsZo8QTxYwv5aoc2rxR1
+</span></span></code></pre></div><h5 id="pwgen">pwgen</h5>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>pwgen -ysBv <span style="color:#ae81ff">20</span> -n1
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># we are geerating a 20 character long password. alter the -n parameter to generate more passwords</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>9h$FR{v/*7.z$/$9zfx-
+</span></span></code></pre></div><h5 id="gpg">gpg</h5>
+<p>We can generate random secure passwords with gpg using the following command. We will specify s length of 20 chars.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>gpg --gen-random --armor <span style="color:#ae81ff">1</span> <span style="color:#ae81ff">20</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># this command will generate a secure, random base64 encoded apssword</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>B0nKqkHe/lJnu0Z6npYxvUILgYw=
+</span></span></code></pre></div><h5 id="sha-secure-hashing-algorithm">SHA (Secure Hashing Algorithm)</h5>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>date +%s | sha256sum | base64 | head -c <span style="color:#ae81ff">20</span> ; echo
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>OWE3ZjY3YjY0MjZiZDVi
+</span></span></code></pre></div><h5 id="md5">md5</h5>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>date | md5sum
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>b796eaba55e90433a3f8041203b338b4
+</span></span></code></pre></div><h5 id="xkcdpass">xkcdpass</h5>
+<p>xkcdpass is not installed by default, (atleast on Debian 12 on which I&rsquo;m running these commands.) it can be installed via <code>apt install kkcdpass</code>. This proram will generate a list of words which you could use as your passphrase.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>havoc@trident:~$ xkcdpass 
+</span></span><span style="display:flex;"><span>palpitate arguable popper renegade eclipse boned
+</span></span></code></pre></div><h5 id="diceware">diceware</h5>
+<p>diceware functions in a manner similar to xkcdpass.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>havoc@trident:~$ diceware 
+</span></span><span style="display:flex;"><span>AmbushUnworldlyUnmadePoachCofounderDisown
+</span></span></code></pre></div><p>you can specify the wordlist to use with the <code>--wordlist</code> parameter like so:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>havoc@trident:~$ diceware --wordlist en_eff
+</span></span><span style="display:flex;"><span>FitHungerTrillionLevelDrinkableJarring
+</span></span></code></pre></div><p>Use any of these utilities to generate your passwords. You could use a passwords manager to store these passwords. Keepass2 has an inbuilt password manager you can use to generate passwords. ⚠️<em>Pick your poison, stay safe online</em>. Whereever possible, use <strong>2FA</strong> (Two Factor Authentication). Store your backup codes (<em>yes, you can download your backp codes for your online services, which can be used when you don&rsquo;t access to your 2FA devices. I once lost access to my dropbox because I didnt have my backup codes 😢</em>) in a secure location and manner.</p>
+<p>
+		
+<a href="/images/stay-safe-online-or-you-will-look-like-me.png?height=300px" data-featherlight="image">
+<img src="/images/stay-safe-online-or-you-will-look-like-me.png?height=300px" alt="Stay Safe Online" style="height: 300px; width: auto;" loading="lazy">
+</a></p>
+
+            <footer class="footline">
+            </footer>
+          </article>
+        </div>
+      </main>
+    </div>
+    <script src="/js/clipboard.min.js?1690802202" defer></script>
+    <script src="/js/perfect-scrollbar.min.js?1690802202" defer></script>
+    <script src="/js/featherlight.min.js?1690802202" defer></script>
+    <script src="/js/theme.js?1690802202" defer></script>
+  </body>
+</html>

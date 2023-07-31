@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>eternalblue on solc0nf</title>
+    <link>https://solc0nf.github.io/tags/eternalblue/index.html</link>
+    <description>Recent content in eternalblue on solc0nf</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sat, 04 Mar 2023 17:23:17 +0400</lastBuildDate><atom:link href="https://solc0nf.github.io/tags/eternalblue/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Eternal Blue</title>
+      <link>https://solc0nf.github.io/exploit-articles/eternal-blue/index.html</link>
+      <pubDate>Sat, 04 Mar 2023 17:23:17 +0400</pubDate>
+      <guid>https://solc0nf.github.io/exploit-articles/eternal-blue/index.html</guid>
+      <description>EternalBlue is the name given to a series of Microsoft software vulnerabilities, as well as an exploit developed by the Unites State&amp;rsquo;s NSA, as a cyber attack tool. Although the EternalBlue exploit affects only Windows operating systems, anything that uses the SMBv1 file sharing protocol is vulnerable to attack, such as Siemens ultrasound medical equipment.
+EternalBlue was developed the NSA as a part of their controversial program of stockpiling and weaponizing cybersecurity vulnerabilities, rather that flagging those to the appropriate vendor for remediation.</description>
+    </item>
+  </channel>
+</rss>

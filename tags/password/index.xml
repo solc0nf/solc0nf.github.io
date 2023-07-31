@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>password&#39; on solc0nf</title>
+    <link>https://solc0nf.github.io/tags/password/index.html</link>
+    <description>Recent content in password&#39; on solc0nf</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 30 Jul 2023 20:15:17 +0400</lastBuildDate><atom:link href="https://solc0nf.github.io/tags/password/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Secure Passwords in Linux</title>
+      <link>https://solc0nf.github.io/linux-howto/secure-passwords-in-linux/index.html</link>
+      <pubDate>Sun, 30 Jul 2023 20:15:17 +0400</pubDate>
+      <guid>https://solc0nf.github.io/linux-howto/secure-passwords-in-linux/index.html</guid>
+      <description>There are many utilities in Linux that help us in generating random passwords. The neccessity of having a strong password is well known. The problem with random passwords is that it is nearly impossible for us remember them. Using a password manager like KeePassX or KeePass2. That way, you only have to remember one password, the master pasword to unlock your password vault. This leads to another monkey&amp;rsquo;s tail scenario. If we loose/forget the master password, we you&amp;rsquo;re doomed.</description>
+    </item>
+  </channel>
+</rss>
